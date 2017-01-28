@@ -34,7 +34,6 @@
         };
         
         function postcodeLookupGeneral() {
-            console.log('called');
             postcodeToTest = $.trim($('#postcode').val().toUpperCase());
                 $.ajax({
                     url: "https://api.postcodes.io/postcodes/" + postcodeToTest.replace(" ", ""),
