@@ -8,7 +8,7 @@
         map = map_and_layer['map'];
         layer = map_and_layer['layer'];
 
-        var postcodeLookup = function (postcodeToTest) {
+        var postcodeLookupLocal = function (postcodeToTest) {
             if (postcodeToTest in postcodes) {
                 return postcodes[postcodeToTest];
             } else {
@@ -32,10 +32,10 @@
                 }
             }
         };
-
-        $('#postcode').keyup(function (event) {
-            if (event.keyCode === 13 || event.keyCode === 32) {
-                postcodeToTest = $.trim($('#postcode').val().toUpperCase());
+        
+        function postcodeLookupGeneral() {
+            console.log('called');
+            postcodeToTest = $.trim($('#postcode').val().toUpperCase());
                 $.ajax({
                     url: "https://api.postcodes.io/postcodes/" + postcodeToTest.replace(" ", ""),
                     success: function (result) {
@@ -49,7 +49,7 @@
                         }
                     },
                     error: function () {
-                        var latlng = postcodeLookup(postcodeToTest);
+                        var latlng = postcodeLookupLocal(postcodeToTest);
                         if (latlng) {
                             $('.errorMessage').addClass('notDisplayed');
                             map.panTo(new google.maps.LatLng(latlng[0], latlng[1]));
@@ -59,9 +59,17 @@
                         }
                     }
                 });
+        }
 
-
+        $('#postcode').keyup(function (event) {
+            if (event.keyCode === 32) {
+                postcodeLookupGeneral();
             }
+        });
+        
+        $('#postcodeSubmit').on('click', function() {
+            postcodeLookupGeneral();
+            return false; 
         });
 
         $('#filters').on('change', function () {

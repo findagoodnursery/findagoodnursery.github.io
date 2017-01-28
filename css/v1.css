@@ -9,6 +9,12 @@ body {
     color: #505050;
 }
 
+#postcodeLookupForm {
+    display: inline;
+    position: relative; 
+    top: -3px;
+}
+
 .checkboxLabel {
     line-height: 24px; 
 }
