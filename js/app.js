@@ -103,7 +103,7 @@
             console.log(textValue);
             var filter;
             if (textValue.length > 2) {
-                filter = "Name CONTAINS IGNORING CASE '" + textValue + "'";
+                filter = 'Name CONTAINS IGNORING CASE "' + textValue + '"';
                 layer.setOptions({
                     query: {
                         select: "col4",
