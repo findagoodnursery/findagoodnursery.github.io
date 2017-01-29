@@ -87,6 +87,15 @@
                 }
             });
         });
+        
+        $("#nameSearch").autocomplete({
+            minLength: 3, 
+            select: function( event, ui ) {
+                console.log(ui.item.latLng);
+                map.panTo(new google.maps.LatLng(ui.item.latLng[0], ui.item.latLng[1]));
+                map.setZoom(14);
+            }
+        });
 
         $('#nameSearch').keyup(function (event) {
             var results = [];
@@ -94,7 +103,7 @@
             console.log(textValue);
             var filter;
             if (textValue.length > 2) {
-                filter = "'Name' CONTAINS IGNORING CASE '" + textValue + "'";
+                filter = "Name CONTAINS IGNORING CASE '" + textValue + "'";
                 layer.setOptions({
                     query: {
                         select: "col4",
@@ -103,18 +112,24 @@
                     }
                 });
 
-
                 $.ajax({
-                    url: encodeURI("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT " + filter + " FROM 1NVngiWyLZULKjvNpyDamWAj35Y2SQyIUZt1b-UYM&key=AIzaSyCBSSVwKewIscE22gLQqPxArKvBlxTqv3U"),
+                    url: encodeURI("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT * FROM 1DK0-Q0RT7XlDrPyPiwM8uQLlYFwsQs9_JkXcKc6u WHERE " + filter + "&key=AIzaSyCBSSVwKewIscE22gLQqPxArKvBlxTqv3U"),
                     success: function (result) {
-                        if (result.status === 200) {
-                            console.log(result);
-                        } else {
-                            console.log('error one');
-                        }
+                        var suggestions = [];
+                        $.each(result.rows, function (index, value) {
+                            if (value[0].toLowerCase().indexOf(textValue.toLowerCase()) === 0) {
+                                suggestions.push({
+                                    'label': value[0], 
+                                    'value': value[0], 
+                                    'latLng': [value[1], value[2]]
+                                });
+                            }
+                        });
+                        console.log(suggestions);
+                        $("#nameSearch").autocomplete( "option", "source", suggestions);
                     },
                     error: function () {
-                        console.log('error');
+                        console.log('Erroneous');
                     }
                 });
 
