@@ -9,6 +9,10 @@ body {
     color: #505050;
 }
 
+h4 {
+    margin: 4px 0 10px; 
+}
+
 #postcodeLookupForm, #nameSearch {
     display: inline;
     position: relative; 
