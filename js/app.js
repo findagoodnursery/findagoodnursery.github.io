@@ -103,7 +103,7 @@
             console.log(textValue);
             var filter;
             if (textValue.length > 2) {
-                filter = 'Name CONTAINS IGNORING CASE "' + textValue + '"';
+                filter = "Name CONTAINS IGNORING CASE '" + textValue + "'";
                 layer.setOptions({
                     query: {
                         select: "col4",
@@ -113,7 +113,7 @@
                 });
 
                 $.ajax({
-                    url: encodeURI('https://www.googleapis.com/fusiontables/v2/query?sql=SELECT * FROM 1DK0-Q0RT7XlDrPyPiwM8uQLlYFwsQs9_JkXcKc6u WHERE ' + filter + '&key=AIzaSyCBSSVwKewIscE22gLQqPxArKvBlxTqv3U'),
+                    url: encodeURI("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT * FROM 1DK0-Q0RT7XlDrPyPiwM8uQLlYFwsQs9_JkXcKc6u WHERE " + filter + "&key=AIzaSyCBSSVwKewIscE22gLQqPxArKvBlxTqv3U"),
                     success: function (result) {
                         var suggestions = [];
                         $.each(result.rows, function (index, value) {
