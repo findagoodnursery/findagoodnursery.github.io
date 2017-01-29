@@ -105,7 +105,7 @@
 
 
                 $.ajax({
-                    url: encodeURI("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT " + filter + "&key=AIzaSyCBSSVwKewIscE22gLQqPxArKvBlxTqv3U"),
+                    url: encodeURI("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT " + filter + " FROM 1NVngiWyLZULKjvNpyDamWAj35Y2SQyIUZt1b-UYM&key=AIzaSyCBSSVwKewIscE22gLQqPxArKvBlxTqv3U"),
                     success: function (result) {
                         if (result.status === 200) {
                             console.log(result);
