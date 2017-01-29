@@ -32,32 +32,32 @@
                 }
             }
         };
-        
+
         function postcodeLookupGeneral() {
             postcodeToTest = $.trim($('#postcode').val().toUpperCase());
-                $.ajax({
-                    url: "https://api.postcodes.io/postcodes/" + postcodeToTest.replace(" ", ""),
-                    success: function (result) {
-                        if (result.status === 200 && result.hasOwnProperty('result') && result.result.hasOwnProperty('latitude')) {
-                            var latlng = [result.result.latitude, result.result.longitude];
-                            $('.errorMessage').addClass('notDisplayed');
-                            map.panTo(new google.maps.LatLng(latlng[0], latlng[1]));
-                            map.setZoom(14);
-                        } else {
-                            $('.errorMessage').removeClass('notDisplayed');
-                        }
-                    },
-                    error: function () {
-                        var latlng = postcodeLookupLocal(postcodeToTest);
-                        if (latlng) {
-                            $('.errorMessage').addClass('notDisplayed');
-                            map.panTo(new google.maps.LatLng(latlng[0], latlng[1]));
-                            map.setZoom(14);
-                        } else {
-                            $('.errorMessage').removeClass('notDisplayed');
-                        }
+            $.ajax({
+                url: "https://api.postcodes.io/postcodes/" + postcodeToTest.replace(" ", ""),
+                success: function (result) {
+                    if (result.status === 200 && result.hasOwnProperty('result') && result.result.hasOwnProperty('latitude')) {
+                        var latlng = [result.result.latitude, result.result.longitude];
+                        $('.errorMessage').addClass('notDisplayed');
+                        map.panTo(new google.maps.LatLng(latlng[0], latlng[1]));
+                        map.setZoom(14);
+                    } else {
+                        $('.errorMessage').removeClass('notDisplayed');
                     }
-                });
+                },
+                error: function () {
+                    var latlng = postcodeLookupLocal(postcodeToTest);
+                    if (latlng) {
+                        $('.errorMessage').addClass('notDisplayed');
+                        map.panTo(new google.maps.LatLng(latlng[0], latlng[1]));
+                        map.setZoom(14);
+                    } else {
+                        $('.errorMessage').removeClass('notDisplayed');
+                    }
+                }
+            });
         }
 
         $('#postcode').keyup(function (event) {
@@ -65,10 +65,10 @@
                 postcodeLookupGeneral();
             }
         });
-        
-        $('#postcodeSubmit').on('click', function() {
+
+        $('#postcodeSubmit').on('click', function () {
             postcodeLookupGeneral();
-            return false; 
+            return false;
         });
 
         $('#filters').on('change', function () {
@@ -86,6 +86,23 @@
                     where: filter
                 }
             });
+        });
+
+        $('#nameSearch').keyup(function (event) {
+            var results = [];
+            var textValue = $('#nameSearch').val();
+            console.log(textValue);
+            if (textValue.length > 2) {
+                filter = "'Name' CONTAINS IGNORING CASE '" + textValue + "'";
+                layer.setOptions({
+                    query: {
+                        select: "col4",
+                        from: "1NVngiWyLZULKjvNpyDamWAj35Y2SQyIUZt1b-UYM",
+                        where: filter
+                    }
+                });
+            }
+
         });
     })
 })();

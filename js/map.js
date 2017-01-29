@@ -55,6 +55,8 @@ function initialize(map, layer, filterWhere) {
     //     legendOpenButton.style.display = 'block';
     //   }
     // }
+    
+    
     return {
         'map': map,
         'layer': layer
