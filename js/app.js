@@ -33,6 +33,15 @@
             }
         };
 
+        function updateMap(latLng) {
+            $('.errorMessage').addClass('notDisplayed');
+            displaySelectedMarkers();
+            $('#postcode').blur();
+            $("#nameSearch").val("");
+            map.panTo(new google.maps.LatLng(latlng[0], latlng[1]));
+            map.setZoom(14);
+        };
+
         function postcodeLookupGeneral() {
             postcodeToTest = $.trim($('#postcode').val().toUpperCase());
             $.ajax({
@@ -40,11 +49,7 @@
                 success: function (result) {
                     if (result.status === 200 && result.hasOwnProperty('result') && result.result.hasOwnProperty('latitude')) {
                         var latlng = [result.result.latitude, result.result.longitude];
-                        $('.errorMessage').addClass('notDisplayed');
-                        displaySelectedMarkers();
-                        $("#nameSearch").val("");
-                        map.panTo(new google.maps.LatLng(latlng[0], latlng[1]));
-                        map.setZoom(14);
+                        updateMap(latLng); 
                     } else {
                         $('.errorMessage').removeClass('notDisplayed');
                     }
@@ -52,11 +57,7 @@
                 error: function () {
                     var latlng = postcodeLookupLocal(postcodeToTest);
                     if (latlng) {
-                        $('.errorMessage').addClass('notDisplayed');
-                        displaySelectedMarkers();
-                        $("#nameSearch").val("");
-                        map.panTo(new google.maps.LatLng(latlng[0], latlng[1]));
-                        map.setZoom(14);
+                        updateMap(latLng);
                     } else {
                         $('.errorMessage').removeClass('notDisplayed');
                     }
@@ -74,7 +75,7 @@
             postcodeLookupGeneral();
             return false;
         });
-        
+
         function displaySelectedMarkers() {
             var markers = [];
             $('.nurseryRating').each(function () {
@@ -95,11 +96,12 @@
         $('#filters').on('change', function () {
             displaySelectedMarkers();
         });
-        
+
         $("#nameSearch").autocomplete({
-            minLength: 3, 
-            select: function( event, ui ) {
+            minLength: 3,
+            select: function (event, ui) {
                 console.log(ui.item.latLng);
+                $("#nameSearch").blur();
                 map.panTo(new google.maps.LatLng(ui.item.latLng[0], ui.item.latLng[1]));
                 map.setZoom(14);
                 $('#postcode').val("");
@@ -128,14 +130,14 @@
                         $.each(result.rows, function (index, value) {
                             if (value[0].toLowerCase().indexOf(textValue.toLowerCase()) === 0) {
                                 suggestions.push({
-                                    'label': value[0], 
-                                    'value': value[0], 
+                                    'label': value[0],
+                                    'value': value[0],
                                     'latLng': [value[1], value[2]]
                                 });
                             }
                         });
                         console.log(suggestions);
-                        $("#nameSearch").autocomplete( "option", "source", suggestions);
+                        $("#nameSearch").autocomplete("option", "source", suggestions);
                     },
                     error: function () {
                         console.log('Erroneous');
