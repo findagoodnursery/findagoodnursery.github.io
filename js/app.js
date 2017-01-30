@@ -67,12 +67,12 @@
         $('#postcode').keyup(function (event) {
             if (event.keyCode === 32) {
                 postcodeLookupGeneral();
-                $('#postcode').blur();
             }
         });
 
         $('#postcodeSubmit').on('click', function () {
             postcodeLookupGeneral();
+            $('#postcode').blur();
             return false;
         });
 
