@@ -102,6 +102,7 @@
                 console.log(ui.item.latLng);
                 map.panTo(new google.maps.LatLng(ui.item.latLng[0], ui.item.latLng[1]));
                 map.setZoom(14);
+                $('#postcode').val("");
             }
         });
 
