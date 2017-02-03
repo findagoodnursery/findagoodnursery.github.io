@@ -130,14 +130,20 @@
                         $.each(result.rows, function (index, value) {
                             if (value[0].toLowerCase().indexOf(textValue.toLowerCase()) === 0) {
                                 suggestions.push({
-                                    'label': value[0],
+                                    'label': value[0] + ", " + value[1],
                                     'value': value[0],
-                                    'latLng': [value[1], value[2]]
+                                    'latLng': [value[2], value[3]]
                                 });
                             }
                         });
                         console.log(suggestions);
-                        $("#nameSearch").autocomplete("option", "source", suggestions);
+                        $("#nameSearch").autocomplete("option", "source", suggestions.sort(function (a, b) {
+                            if (a.label.toLowerCase() < b.label.toLowerCase())
+                                return -1;
+                            if (a.label.toLowerCase() > b.label.toLowerCase())
+                                return 1;
+                            return 0;
+                        }));
                     },
                     error: function () {
                         console.log('Erroneous');
