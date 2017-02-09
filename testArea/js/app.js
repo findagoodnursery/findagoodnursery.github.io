@@ -87,7 +87,7 @@
             layer.setOptions({
                 query: {
                     select: "col4",
-                    from: "1NVngiWyLZULKjvNpyDamWAj35Y2SQyIUZt1b-UYM",
+                    from: "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA",
                     where: filter
                 }
             });
