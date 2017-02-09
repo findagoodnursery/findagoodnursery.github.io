@@ -93,6 +93,27 @@
             });
         }
 
+        function displaySelectedTypes() {
+            var types = [];
+            $('.nurseryType').each(function () {
+                if (this.checked) {
+                    types.push("'" + this.value + "'");
+                }
+            });
+            filter = "'Category' IN (" + types.join(',') + ")";
+            layer.setOptions({
+                query: {
+                    select: "col4",
+                    from: "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA", //full set
+                    where: filter
+                }
+            });
+        }
+
+        $('#typeFilters').on('change', function () {
+            displaySelectedTypes();
+        });
+
         $('#filters').on('change', function () {
             displaySelectedMarkers();
         });

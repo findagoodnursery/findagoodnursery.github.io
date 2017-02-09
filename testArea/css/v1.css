@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+#typeFilters {
+    display: inline;
+}
+
 body {
     font-family: Helvetica,Arial,freesans,sans-serif; 
     color: #505050;
