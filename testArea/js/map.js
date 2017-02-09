@@ -30,7 +30,7 @@ function initialize(map, layer, filterWhere) {
         },
         query: {
             select: "col4",
-            from: "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA",
+            from: "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA", //full set
             where: filterWhere
         },
         options: {

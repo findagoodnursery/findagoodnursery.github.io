@@ -87,7 +87,7 @@
             layer.setOptions({
                 query: {
                     select: "col4",
-                    from: "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA",
+                    from: "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA", //full set
                     where: filter
                 }
             });
@@ -118,7 +118,7 @@
                 layer.setOptions({
                     query: {
                         select: "col4",
-                        from: "1NVngiWyLZULKjvNpyDamWAj35Y2SQyIUZt1b-UYM",
+                        from: "1-bbXnnEvdA8Kqlr-rkxCw2Bs_pJb4wgQyYeUOCKF", //names only
                         where: filter
                     }
                 });
