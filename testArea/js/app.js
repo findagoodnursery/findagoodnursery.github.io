@@ -118,13 +118,13 @@
                 layer.setOptions({
                     query: {
                         select: "col4",
-                        from: "1-bbXnnEvdA8Kqlr-rkxCw2Bs_pJb4wgQyYeUOCKF", //names only
+                        from: "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA", //full set
                         where: filter
                     }
                 });
 
                 $.ajax({
-                    url: encodeURI("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT * FROM 1DK0-Q0RT7XlDrPyPiwM8uQLlYFwsQs9_JkXcKc6u WHERE " + filter + "&key=AIzaSyCBSSVwKewIscE22gLQqPxArKvBlxTqv3U"),
+                    url: encodeURI("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT * FROM 1-bbXnnEvdA8Kqlr-rkxCw2Bs_pJb4wgQyYeUOCKF WHERE " + filter + "&key=AIzaSyCBSSVwKewIscE22gLQqPxArKvBlxTqv3U"), //names only
                     success: function (result) {
                         var suggestions = [];
                         $.each(result.rows, function (index, value) {
