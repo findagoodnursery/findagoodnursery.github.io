@@ -101,6 +101,7 @@
                 }
             });
             filter = "'Category' IN (" + types.join(',') + ")";
+            console.log(filter);
             layer.setOptions({
                 query: {
                     select: "col4",
