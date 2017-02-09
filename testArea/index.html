@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta charset="utf-8">
+    <meta name="description" content="A map of every nursery in England registered with Ofsted, including information on each setting's Ofsted rating, its opening times, and the age range of attendees" />
+    <meta name="Keywords" content="nursery map, nurseries, best nurseries, local nurseries, ofsted, ratings, childcare, local childcare, nearby nurseries, ofsted ratings, top nurseries, england">
+    <meta property="og:description" content="A map of every nursery in England registered with Ofsted, including information on each setting's Ofsted rating, its opening times, and the age range of attendees" />
+    <meta property="og:url" content="http://www.findagoodnursery.co.uk/" />
+    <meta property="og:title" content="Find a good nursery" />
+    <meta property="og:image" content="http://www.findagoodnursery.co.uk/img/findagoodnursery_promo_v1.PNG" />
+    <meta property="og:image:width" content="740" />
+    <meta property="og:image:height" content="492" />
+    <meta name="twitter:image" content="http://www.findagoodnursery.co.uk/img/findagoodnursery_promo_v1.PNG" />
+    <title>Find a good nursery</title>
+    <link rel="stylesheet" type="text/css" href="css/v1.css" />
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?v=3&key=AIzaSyCBSSVwKewIscE22gLQqPxArKvBlxTqv3U"></script>
+    <script type="text/javascript" src="./lib/jquery-3.1.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script type="text/javascript" src="./js/data_v1.js"></script>
+    <script type="text/javascript" src="./js/map.js"></script>
+    <script type="text/javascript" src="./js/app.js"></script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-91332122-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script type="text/javascript" src="./cookie-bar/cookiebar-latest.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Find a good nursery</h2>
+        <p>A map of every nursery in England registered with Ofsted</p>
+        <h4>Enter your postcode <form id="postcodeLookupForm"><input type="text" id="postcode" size=10><input id="postcodeSubmit" type="submit" value="Go"></form>,</h4> 
+        <h4>or search for a specific nursery by name: <input type="text" id="nameSearch"></h4>
+        <h4>Click on a marker for more info about the nursery</h4>
+        <p class="errorMessage notDisplayed">Sorry, postcode not recognised</p>
+        <div id="googft-mapCanvas"></div>
+        <div id="googft-legend"></div>
+        <div id="googft-legend-open"></div>
+        <div id="googft-legend-close"></div>
+        <p>Show nurseries rated:
+            <form id="filters">
+                <input id="checkbox1" type="checkbox" class="nurseryRating" value="large_green" checked>
+                <label for="checkbox1" class="checkboxLabel">
+                    <img class="iconKey" src="http://maps.google.com/mapfiles/kml/paddle/grn-circle.png" />Outstanding</label>
+                <br />
+                <input id="checkbox2" type="checkbox" class="nurseryRating" value="large_blue" checked>
+                <label for="checkbox2" class="checkboxLabel">
+                    <img class="iconKey" src="http://maps.google.com/mapfiles/kml/paddle/blu-circle.png" />Good/meets requirements</label>
+                <br />
+                <input id="checkbox3" type="checkbox" class="nurseryRating" value="large_yellow" checked>
+                <label for="checkbox3" class="checkboxLabel">
+                    <img class="iconKey" src="http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png" />Satisfactory/requires improvement</label>
+                <br />
+                <input id="checkbox4" type="checkbox" class="nurseryRating" value="large_red" checked>
+                <label for="checkbox4" class="checkboxLabel">
+                    <img class="iconKey" src="http://maps.google.com/mapfiles/kml/paddle/red-circle.png" />Inadequate/does not meet requirements</label>
+                <br />
+                <input id="checkbox5" type="checkbox" class="nurseryRating" value="placemark_circle" checked>
+                <label for="checkbox5" class="checkboxLabel">
+                    <img class="iconKey" src="http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png" />No recent report found</label>
+            </form>
+            <h3>About this page</h3>
+            <p>There are some great resources for finding local schools, like <a href="http://www.locrating.com/">locrating.com</a>, and childminders, like <a href="https://www.childcare.co.uk/">childcare.co.uk</a>, but my wife and I struggled to find an easy way of figuring out even basic information about nurseries, such as where the nearest ones were located. This seemed a pity, because parents looking for a nursery may be less reliant on catchment areas and more likely to consider a location near to the office or on the way to work. Also, parents looking to move home might find it hard to tell whether it is likely to be easier or harder to find childcare in their prospective new neighbourhood.</p>
+            <p>This map is an attempt to improve the situation. It shows every organisation categorised as a nursery or as "childcare on non-domestic premises" on Ofsted's website, and some information compiled by Ofsted about each setting, including the age range of children attending and data on opening times. Although I will do my best to ensure the data is as accurate and up-to-date as possible, it is advisable to double-check any information found here.</p>
+            <p>If you do notice any errors or omissions, please contact me on findagoodnursery at gmail dot com.</p>
+            <h3>Why might there be errors?</h3>
+            <p>Much of the information displayed on this page is published by Ofsted as pdf files, which are notoriously difficult to extract information from. To make this map, computer code has had to trawl through more than 21,000 pdfs. If one document is formatted differently from the others, key information like age range may be missed, or captured incorrectly. It is hard to manually identify all of these anomalies, so please do get in touch if you find any problems.</p>
+            <h3>Why might "no recent report" have been found?</h3>
+            <p>This may be a new nursery that hasn't been inspected yet. Or it could be a well-established one that hasn't been inspected for more than about five years; Ofsted reports older than this were formatted differently, and their contents are not captured for the reasons described above.</p>
+        <h3>Should home childcare be included on the map?</h3>
+        <p>Key information about the vast majority of settings categorised as "childcare on domestic premises", including their postcodes, are redacted by Ofsted, meaning that they cannot be included on the map, even if it were appropriate to do so. If you are looking for home childcare, you could try <a href="https://www.childcare.co.uk/">childcare.co.uk</a>, which does not reveal the exact location of these settings but instead enables you to contact the managers of your nearest ones.</p>
+            <p class="credits">All nursery data courtesy of <a href="https://reports.ofsted.gov.uk/">Ofsted</a>. Map and data analysis by <a href="https://edlowther.github.io/">Ed Lowther</a>, © 2017</p>
+    </div>
+</body>
+
+</html>

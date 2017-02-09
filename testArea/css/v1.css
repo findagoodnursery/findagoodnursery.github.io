@@ -1,0 +1,55 @@
+#googft-mapCanvas {
+  height: 500px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+body {
+    font-family: Helvetica,Arial,freesans,sans-serif; 
+    color: #505050;
+}
+
+input[type="text"] {
+    font-size: 16px;
+}
+input[type="submit"] {
+    height: 22px;
+    position: relative;
+    top: -2px;
+    margin-left: 1px;
+    font-weight: bold;
+    color: #505050;
+}
+
+h4 {
+    margin: 8px 0 10px; 
+}
+
+#postcodeLookupForm {
+    display: inline;
+}
+
+.checkboxLabel {
+    line-height: 24px; 
+}
+
+.iconKey {
+    width: 24px;
+}
+
+.container {
+	max-width: 700px; 
+	margin: 0 auto;
+}
+
+.notDisplayed {
+    display: none;
+}
+
+.errorMessage {
+    color: red;
+}
+
+.credits {
+    font-style: italic;
+}
