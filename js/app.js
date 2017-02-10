@@ -144,6 +144,7 @@
                     }
                 });
                 $("#nameSearch").blur();
+                $('#nameSearchForm').submit();
             }
         });
 
