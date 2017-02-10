@@ -128,7 +128,7 @@
             select: function (event, ui) {
                 console.log(ui.item.latLng);
                 $("#nameSearch").blur();
-                $('input:focus').blur();
+                $('#googft-mapCanvas').focus();
                 map.panTo(new google.maps.LatLng(ui.item.latLng[0], ui.item.latLng[1]));
                 map.setZoom(14);
                 $('#postcode').val("");
