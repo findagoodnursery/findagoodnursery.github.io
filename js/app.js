@@ -110,7 +110,7 @@
                 }
             });
         }
-        
+
         $('#googft-mapCanvas').on('click', function () {
             $('input:focus').blur();
         });
@@ -126,12 +126,18 @@
         $("#nameSearch").autocomplete({
             minLength: 3,
             select: function (event, ui) {
-                console.log('selected');
-                $("#nameSearch").blur();
-                console.log('selected two');
                 map.panTo(new google.maps.LatLng(ui.item.latLng[0], ui.item.latLng[1]));
                 map.setZoom(14);
                 $('#postcode').val("");
+                filter = "Name CONTAINS IGNORING CASE '" + $('#nameSearch').val().replace("'", "''") + "'";
+                layer.setOptions({
+                    query: {
+                        select: "col4",
+                        from: "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA", //full set
+                        where: filter
+                    }
+                });
+                $("#nameSearch").blur();
             }
         });
 
