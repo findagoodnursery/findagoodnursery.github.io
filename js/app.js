@@ -76,6 +76,11 @@
             return false;
         });
 
+        $('#nameSearchForm').on('submit', function () {
+            $('#nameSearch').blur();
+            return false;
+        });
+
         function displaySelectedMarkers() {
             var markers = [];
             $('.nurseryRating').each(function () {
@@ -138,9 +143,6 @@
                         where: filter
                     }
                 });
-                $("#nameSearch").blur();
-            }, 
-            close: function (event, ui) {
                 $("#nameSearch").blur();
             }
         });
