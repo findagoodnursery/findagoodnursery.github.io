@@ -139,7 +139,9 @@
                     }
                 });
                 $("#nameSearch").blur();
-                $('#nameSearchForm').submit();
+                $('#nameSearchForm').submit(function (event) {
+                    event.preventDefault();
+                });
             }
         });
 
