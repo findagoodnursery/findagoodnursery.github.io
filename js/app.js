@@ -138,9 +138,9 @@
                         where: filter
                     }
                 });
-                $("#nameSearch").blur();
                 $('#nameSearchForm').submit(function (event) {
                     event.preventDefault();
+                    $("#nameSearch").blur();
                 });
             }
         });
