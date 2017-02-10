@@ -123,6 +123,10 @@
             displaySelectedMarkers();
         });
 
+        $('.ui-menu-item-wrapper').on('click', function () {
+            $("#nameSearch").blur();
+        })
+
         $("#nameSearch").autocomplete({
             minLength: 3,
             select: function (event, ui) {
