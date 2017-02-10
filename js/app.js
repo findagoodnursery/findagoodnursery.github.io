@@ -138,6 +138,7 @@
                         where: filter
                     }
                 });
+                $("#nameSearch").blur();
             }
         });
 
