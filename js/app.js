@@ -129,6 +129,7 @@
                 map.panTo(new google.maps.LatLng(ui.item.latLng[0], ui.item.latLng[1]));
                 map.setZoom(14);
                 $('#postcode').val("");
+                console.log($('#nameSearch').val());
                 filter = "Name CONTAINS IGNORING CASE '" + $('#nameSearch').val().replace("'", "''") + "'";
                 layer.setOptions({
                     query: {
