@@ -138,10 +138,6 @@
                         where: filter
                     }
                 });
-                $('#nameSearchForm').submit(function (event) {
-                    $("#nameSearch").blur();
-                    return false;
-                });
             }
         });
 
