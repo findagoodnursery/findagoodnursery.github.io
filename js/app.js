@@ -110,6 +110,10 @@
                 }
             });
         }
+        
+        $('#googft-mapCanvas').on('click', function () {
+            $('input:focus').blur();
+        });
 
         $('#typeFilters').on('change', function () {
             displaySelectedTypes();
