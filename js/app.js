@@ -139,6 +139,7 @@
                     }
                 });
                 $("#nameSearch").blur();
+                $('#nameSearchForm').submit();
             }
         });
 
