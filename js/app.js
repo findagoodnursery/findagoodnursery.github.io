@@ -126,12 +126,16 @@
         }
 
         $('#nameSubmit').on('click', function () {
+            $('#postcode').val("");
+            $('.postcodeErrorMessage').addClass('notDisplayed');
             nameLookup();
             $('#nameSearch').blur();
             return false;
         });
 
         $('#nameSearchForm').on('submit', function () {
+            $('#postcode').val("");
+            $('.postcodeErrorMessage').addClass('notDisplayed');
             nameLookup();
             $('#nameSearch').blur();
             return false;
