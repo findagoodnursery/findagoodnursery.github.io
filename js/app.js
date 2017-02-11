@@ -35,8 +35,9 @@
 
         function updateMap(latlng) {
             $('.postcodeErrorMessage').addClass('notDisplayed');
-            displaySelectedMarkers();
+            $('.nameErrorMessage').addClass('notDisplayed');
             $("#nameSearch").val("");
+            displaySelectedMarkers();
             map.panTo(new google.maps.LatLng(latlng[0], latlng[1]));
             map.setZoom(14);
         };
@@ -189,6 +190,7 @@
                 map.panTo(new google.maps.LatLng(ui.item.latLng[0], ui.item.latLng[1]));
                 map.setZoom(14);
                 $('#postcode').val("");
+                $('.postcodeErrorMessage').addClass('notDisplayed');
                 console.log(ui.item.value);
                 filter = "Name CONTAINS IGNORING CASE '" + ui.item.value.replace("'", "''") + "'";
                 layer.setOptions({
