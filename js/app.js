@@ -121,6 +121,8 @@
         });
 
         $('#typeFilters').on('change', function () {
+            $('#postcode').val("");
+            $("#nameSearch").val("");
             displaySelectedTypes();
         });
 
