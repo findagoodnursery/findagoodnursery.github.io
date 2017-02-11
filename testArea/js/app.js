@@ -76,6 +76,11 @@
             return false;
         });
 
+        $('#nameSearchForm').on('submit', function () {
+            $('#nameSearch').blur();
+            return false;
+        });
+
         function displaySelectedMarkers() {
             var markers = [];
             $('.nurseryRating').each(function () {
@@ -111,6 +116,10 @@
             });
         }
 
+        $('#googft-mapCanvas').on('click', function () {
+            $('input:focus').blur();
+        });
+
         $('#typeFilters').on('change', function () {
             displaySelectedTypes();
         });
@@ -122,11 +131,20 @@
         $("#nameSearch").autocomplete({
             minLength: 3,
             select: function (event, ui) {
-                console.log(ui.item.latLng);
-                $("#nameSearch").blur();
                 map.panTo(new google.maps.LatLng(ui.item.latLng[0], ui.item.latLng[1]));
                 map.setZoom(14);
                 $('#postcode').val("");
+                console.log(ui.item.value);
+                filter = "Name CONTAINS IGNORING CASE '" + ui.item.value.replace("'", "''") + "'";
+                layer.setOptions({
+                    query: {
+                        select: "col4",
+                        from: "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA", //full set
+                        where: filter
+                    }
+                });
+                $("#nameSearch").blur();
+                $('#nameSearchForm').submit();
             }
         });
 
