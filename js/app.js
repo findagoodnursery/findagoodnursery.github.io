@@ -149,6 +149,15 @@
                 }
             });
             filter = "'Marker' IN (" + markers.join(',') + ")";
+            
+            var types = [];
+            $('.nurseryType').each(function () {
+                if (this.checked) {
+                    types.push("'" + this.value + "'");
+                }
+            });
+            filter += " AND 'Category' IN (" + types.join(',') + ")";
+            
             layer.setOptions({
                 query: {
                     select: "col4",
