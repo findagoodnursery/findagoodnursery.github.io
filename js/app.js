@@ -75,7 +75,7 @@
             $('#postcode').blur();
             return false;
         });
-        
+
         function nameLookup() {
             var textValue = $('#nameSearch').val();
             console.log(textValue);
@@ -104,13 +104,18 @@
                             }
                         });
                         console.log(suggestions);
-                        $("#nameSearch").autocomplete("option", "source", suggestions.sort(function (a, b) {
-                            if (a.label.toLowerCase() < b.label.toLowerCase())
-                                return -1;
-                            if (a.label.toLowerCase() > b.label.toLowerCase())
-                                return 1;
-                            return 0;
-                        }));
+                        if (suggestions.length === 0) {
+                            $('.nameErrorMessage').removeClass('notDisplayed');
+                        } else {
+                            $('.nameErrorMessage').addClass('notDisplayed');
+                            $("#nameSearch").autocomplete("option", "source", suggestions.sort(function (a, b) {
+                                if (a.label.toLowerCase() < b.label.toLowerCase())
+                                    return -1;
+                                if (a.label.toLowerCase() > b.label.toLowerCase())
+                                    return 1;
+                                return 0;
+                            }));
+                        }
                     },
                     error: function () {
                         console.log('Erroneous');
@@ -120,11 +125,13 @@
         }
 
         $('#nameSubmit').on('click', function () {
+            nameLookup();
             $('#nameSearch').blur();
             return false;
         });
 
         $('#nameSearchForm').on('submit', function () {
+            nameLookup();
             $('#nameSearch').blur();
             return false;
         });
