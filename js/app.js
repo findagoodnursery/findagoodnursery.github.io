@@ -34,7 +34,7 @@
         };
 
         function updateMap(latlng) {
-            $('.errorMessage').addClass('notDisplayed');
+            $('.postcodeErrorMessage').addClass('notDisplayed');
             displaySelectedMarkers();
             $("#nameSearch").val("");
             map.panTo(new google.maps.LatLng(latlng[0], latlng[1]));
@@ -50,7 +50,7 @@
                         var latlng = [result.result.latitude, result.result.longitude];
                         updateMap(latlng);
                     } else {
-                        $('.errorMessage').removeClass('notDisplayed');
+                        $('.postcodeErrorMessage').removeClass('notDisplayed');
                     }
                 },
                 error: function () {
@@ -58,7 +58,7 @@
                     if (latlng) {
                         updateMap(latlng);
                     } else {
-                        $('.errorMessage').removeClass('notDisplayed');
+                        $('.postcodeErrorMessage').removeClass('notDisplayed');
                     }
                 }
             });
@@ -73,6 +73,54 @@
         $('#postcodeSubmit').on('click', function () {
             postcodeLookupGeneral();
             $('#postcode').blur();
+            return false;
+        });
+        
+        function nameLookup() {
+            var textValue = $('#nameSearch').val();
+            console.log(textValue);
+            var filter;
+            if (textValue.length > 2) {
+                filter = "Name CONTAINS IGNORING CASE '" + textValue.replace("'", "''") + "'";
+                layer.setOptions({
+                    query: {
+                        select: "col4",
+                        from: "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA", //full set
+                        where: filter
+                    }
+                });
+
+                $.ajax({
+                    url: encodeURI("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT * FROM 1-bbXnnEvdA8Kqlr-rkxCw2Bs_pJb4wgQyYeUOCKF WHERE " + filter + "&key=AIzaSyCBSSVwKewIscE22gLQqPxArKvBlxTqv3U"), //names only
+                    success: function (result) {
+                        var suggestions = [];
+                        $.each(result.rows, function (index, value) {
+                            if (value[0].toLowerCase().indexOf(textValue.toLowerCase()) === 0) {
+                                suggestions.push({
+                                    'label': value[0] + ", " + value[1],
+                                    'value': value[0],
+                                    'latLng': [value[2], value[3]]
+                                });
+                            }
+                        });
+                        console.log(suggestions);
+                        $("#nameSearch").autocomplete("option", "source", suggestions.sort(function (a, b) {
+                            if (a.label.toLowerCase() < b.label.toLowerCase())
+                                return -1;
+                            if (a.label.toLowerCase() > b.label.toLowerCase())
+                                return 1;
+                            return 0;
+                        }));
+                    },
+                    error: function () {
+                        console.log('Erroneous');
+                    }
+                });
+            }
+        }
+
+        $('#nameSubmit').on('click', function () {
+            $('#nameSearch').blur();
             return false;
         });
 
@@ -121,8 +169,6 @@
         });
 
         $('#typeFilters').on('change', function () {
-            $('#postcode').val("");
-            $("#nameSearch").val("");
             displaySelectedTypes();
         });
 
@@ -151,50 +197,7 @@
         });
 
         $('#nameSearch').keyup(function (event) {
-            var results = [];
-            var textValue = $('#nameSearch').val();
-            console.log(textValue);
-            var filter;
-            if (textValue.length > 2) {
-                filter = "Name CONTAINS IGNORING CASE '" + textValue.replace("'", "''") + "'";
-                layer.setOptions({
-                    query: {
-                        select: "col4",
-                        from: "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA", //full set
-                        where: filter
-                    }
-                });
-
-                $.ajax({
-                    url: encodeURI("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT * FROM 1-bbXnnEvdA8Kqlr-rkxCw2Bs_pJb4wgQyYeUOCKF WHERE " + filter + "&key=AIzaSyCBSSVwKewIscE22gLQqPxArKvBlxTqv3U"), //names only
-                    success: function (result) {
-                        var suggestions = [];
-                        $.each(result.rows, function (index, value) {
-                            if (value[0].toLowerCase().indexOf(textValue.toLowerCase()) === 0) {
-                                suggestions.push({
-                                    'label': value[0] + ", " + value[1],
-                                    'value': value[0],
-                                    'latLng': [value[2], value[3]]
-                                });
-                            }
-                        });
-                        console.log(suggestions);
-                        $("#nameSearch").autocomplete("option", "source", suggestions.sort(function (a, b) {
-                            if (a.label.toLowerCase() < b.label.toLowerCase())
-                                return -1;
-                            if (a.label.toLowerCase() > b.label.toLowerCase())
-                                return 1;
-                            return 0;
-                        }));
-                    },
-                    error: function () {
-                        console.log('Erroneous');
-                    }
-                });
-
-
-            }
-
+            nameLookup();
         });
     })
 })();
