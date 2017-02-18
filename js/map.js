@@ -30,7 +30,8 @@ function initialize(map, layer, filterWhere) {
         },
         query: {
             select: "col4",
-            from: "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA", //full set
+            from: "1NVngiWyLZULKjvNpyDamWAj35Y2SQyIUZt1b-UYM", //full set v1
+            //from: "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA", //full set alternative
             where: filterWhere
         },
         options: {
@@ -55,8 +56,8 @@ function initialize(map, layer, filterWhere) {
     //     legendOpenButton.style.display = 'block';
     //   }
     // }
-    
-    
+
+
     return {
         'map': map,
         'layer': layer
