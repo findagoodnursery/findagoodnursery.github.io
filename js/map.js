@@ -1,5 +1,8 @@
 function initialize(map, layer, filterWhere) {
-    console.log(filterWhere);
+
+    //        var fullDatasetId = "1NVngiWyLZULKjvNpyDamWAj35Y2SQyIUZt1b-UYM"; //v1
+    var fullDatasetId = "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA"; //alternative
+
     google.maps.visualRefresh = true;
     var isMobile = (navigator.userAgent.toLowerCase().indexOf('android') > -1) ||
         (navigator.userAgent.match(/(iPod|iPhone|iPad|BlackBerry|Windows Phone|iemobile)/));
@@ -30,8 +33,7 @@ function initialize(map, layer, filterWhere) {
         },
         query: {
             select: "col4",
-            from: "1NVngiWyLZULKjvNpyDamWAj35Y2SQyIUZt1b-UYM", //full set v1
-            //from: "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA", //full set alternative
+            from: fullDatasetId,
             where: filterWhere
         },
         options: {

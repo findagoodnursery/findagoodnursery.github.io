@@ -1,12 +1,15 @@
 (function () {
     $(document).ready(function () {
 
-        var map;
-        var layer;
         var filter = "Marker = 'placemark_circle' OR Marker = 'large_blue'";
-        map_and_layer = initialize(map, layer, filter);
-        map = map_and_layer['map'];
-        layer = map_and_layer['layer'];
+        var map_and_layer = initialize(map, layer, filter);
+        var map = map_and_layer['map'];
+        var layer = map_and_layer['layer'];
+//        var fullDatasetId = "1NVngiWyLZULKjvNpyDamWAj35Y2SQyIUZt1b-UYM"; //v1
+        var fullDatasetId = "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA"; //alternative
+        
+//        var namesOnlyId = "1DK0-Q0RT7XlDrPyPiwM8uQLlYFwsQs9_JkXcKc6u"; //v1
+        var namesOnlyId = "1-bbXnnEvdA8Kqlr-rkxCw2Bs_pJb4wgQyYeUOCKF"; //v2
 
         var postcodeLookupLocal = function (postcodeToTest) {
             if (postcodeToTest in postcodes) {
@@ -79,22 +82,19 @@
 
         function nameLookup() {
             var textValue = $('#nameSearch').val();
-            console.log(textValue);
             var filter;
             if (textValue.length > 2) {
                 filter = "Name CONTAINS IGNORING CASE '" + textValue.replace("'", "''") + "'";
                 layer.setOptions({
                     query: {
                         select: "col4",
-                        from: "1NVngiWyLZULKjvNpyDamWAj35Y2SQyIUZt1b-UYM", //full set v1
-                        //from: "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA", //full set alternative
+                        from: fullDatasetId,
                         where: filter
                     }
                 });
 
                 $.ajax({
-                    url: encodeURI("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT * FROM 1DK0-Q0RT7XlDrPyPiwM8uQLlYFwsQs9_JkXcKc6u WHERE " + filter + "&key=AIzaSyCBSSVwKewIscE22gLQqPxArKvBlxTqv3U"), //names only v1
-//                    url: encodeURI("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT * FROM 1-bbXnnEvdA8Kqlr-rkxCw2Bs_pJb4wgQyYeUOCKF WHERE " + filter + "&key=AIzaSyCBSSVwKewIscE22gLQqPxArKvBlxTqv3U"), //names only v2
+                    url: encodeURI("https://www.googleapis.com/fusiontables/v2/query?sql=SELECT * FROM " + namesOnlyId + " WHERE " + filter + "&key=AIzaSyCBSSVwKewIscE22gLQqPxArKvBlxTqv3U"), 
                     success: function (result) {
                         var suggestions = [];
                         $.each(result.rows, function (index, value) {
@@ -106,7 +106,6 @@
                                 });
                             }
                         });
-                        console.log(suggestions);
                         if (suggestions.length === 0) {
                             $('.nameErrorMessage').removeClass('notDisplayed');
                         } else {
@@ -163,8 +162,7 @@
             layer.setOptions({
                 query: {
                     select: "col4",
-                    from: "1NVngiWyLZULKjvNpyDamWAj35Y2SQyIUZt1b-UYM", //full set v1
-                    //                    from: "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA", //full set alternative
+                    from: fullDatasetId,
                     where: filter
                 }
             });
@@ -178,12 +176,10 @@
                 }
             });
             filter = "'Category' IN (" + types.join(',') + ")";
-            console.log(filter);
             layer.setOptions({
                 query: {
                     select: "col4",
-                    from: "1NVngiWyLZULKjvNpyDamWAj35Y2SQyIUZt1b-UYM", //full set v1
-                    //                    from: "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA", //full set alternative
+                    from: fullDatasetId, 
                     where: filter
                 }
             });
@@ -208,13 +204,11 @@
                 map.setZoom(14);
                 $('#postcode').val("");
                 $('.postcodeErrorMessage').addClass('notDisplayed');
-                console.log(ui.item.value);
                 filter = "Name CONTAINS IGNORING CASE '" + ui.item.value.replace("'", "''") + "'";
                 layer.setOptions({
                     query: {
                         select: "col4",
-                        from: "1NVngiWyLZULKjvNpyDamWAj35Y2SQyIUZt1b-UYM", //full set v1
-                        //                    from: "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA", //full set alternative
+                        from: fullDatasetId,
                         where: filter
                     }
                 });
