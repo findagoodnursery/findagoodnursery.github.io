@@ -1,7 +1,7 @@
 function initialize(map, layer, filterWhere) {
 
-    var fullDatasetId = "1NVngiWyLZULKjvNpyDamWAj35Y2SQyIUZt1b-UYM"; //v1
-//    var fullDatasetId = "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA"; //alternative
+//    var fullDatasetId = "1NVngiWyLZULKjvNpyDamWAj35Y2SQyIUZt1b-UYM"; //v1
+    var fullDatasetId = "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA"; //alternative
 
     google.maps.visualRefresh = true;
     var isMobile = (navigator.userAgent.toLowerCase().indexOf('android') > -1) ||
