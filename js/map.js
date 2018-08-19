@@ -1,7 +1,7 @@
 function initialize(map, layer, filterWhere) {
 
-//    var fullDatasetId = "1NVngiWyLZULKjvNpyDamWAj35Y2SQyIUZt1b-UYM"; //v1
-    var fullDatasetId = "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA"; //alternative
+   var fullDatasetId = "1NVngiWyLZULKjvNpyDamWAj35Y2SQyIUZt1b-UYM"; //v1
+    // var fullDatasetId = "1TYUsV_PKpYdcNqZHchSVfC0p0Rw673FNKgx1GRxA"; //alternative
 
     google.maps.visualRefresh = true;
     var isMobile = (navigator.userAgent.toLowerCase().indexOf('android') > -1) ||
@@ -15,8 +15,8 @@ function initialize(map, layer, filterWhere) {
     mapDiv.style.height = isMobile ? '360px' : '500px';
     //    if (isMobile) {
     //      var container = document.getElementsByClassName("container")[0];
-    //      container.style.width = '100%'; 
-    //    }; 
+    //      container.style.width = '100%';
+    //    };
     map = new google.maps.Map(mapDiv, {
         center: new google.maps.LatLng(52.2, -1.6),
         zoom: 7,
